@@ -73,6 +73,6 @@ Las organizaciones, especialmente las pequeñas y medianas empresas, a menudo no
 
 * **Nicolas Castro Jaramillo** - *Initial work* - [NicolasCastro9](https://github.com/NicolasCastro9).
 
-* **Santiago Parra** - *Initial work* - [Parralol](https://github.com/Parralol)
+* **Santiago Nicolás Parra Giraldo** - *Initial work* - [Parralol](https://github.com/Parralol)
 
 
