@@ -75,8 +75,3 @@ Desarrollado por **Santiago Nicolas Parra Giraldo**.
 
 
 
-
-
----
-
-Este README cubre la descripción del proyecto, instrucciones para instalación, y un resumen de las funcionalidades principales. A medida que avances en el desarrollo, puedes ampliarlo con detalles adicionales sobre las API y cómo interactuar con el chatbot.
