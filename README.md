@@ -69,11 +69,10 @@ Las organizaciones, especialmente las pequeñas y medianas empresas, a menudo no
 
 ## Contribuciones
 
-Desarrollado por **Juan Esteban Ortiz Pastrana**.
+* **Juan Esteban Ortiz Pastrana** - *Initial work* - [juaneortiz1](https://github.com/juaneortiz1) .
 
-Desarrollado por **Nicolas Castro Jaramillo**.
+* **Nicolas Castro Jaramillo** - *Initial work* - [NicolasCastro9](https://github.com/NicolasCastro9).
 
-Desarrollado por **Santiago Nicolas Parra Giraldo**.
-
+* **Santiago Parra** - *Initial work* - [Parralol](https://github.com/Parralol)
 
 
