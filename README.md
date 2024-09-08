@@ -70,7 +70,9 @@ Las organizaciones, especialmente las pequeñas y medianas empresas, a menudo no
 ## Contribuciones
 
 Desarrollado por **Juan Esteban Ortiz Pastrana**.
+
 Desarrollado por **Nicolas Castro Jaramillo**.
+
 Desarrollado por **Santiago Nicolas Parra Giraldo**.
 
 
