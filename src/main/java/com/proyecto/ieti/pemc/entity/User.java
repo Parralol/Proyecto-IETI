@@ -11,18 +11,22 @@ public class User implements Serializable {
     @Id
     private String id;
 
-    private int score;
+    private int address;
 
     private String name;
+
+    private String password;
 
     public User() {
     }
 
-    public User(String id, int score, String name) {
+    public User(String id, int address, String name, String password) {
         this.id = id;
-        this.score = score;
+        this.address = address;
         this.name = name;
+        this.password = password;
     }
+
 
     public String getId() {
         return id;
@@ -32,12 +36,12 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public int getScore() {
-        return score;
+    public int getAddress() {
+        return address;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setAddress(int address) {
+        this.address = address;
     }
 
     public String getName() {
@@ -48,8 +52,13 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "User [id=" + id + ", score=" + score + ", name=" + name + "]";
+    public String getPassword() {
+        return password;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    
 }
