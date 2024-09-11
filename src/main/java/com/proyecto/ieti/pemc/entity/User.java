@@ -1,47 +1,46 @@
 package com.proyecto.ieti.pemc.entity;
 
-import java.io.Serializable;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.UUID;
 
 @Document("users")
-public class User implements Serializable {
+public class User implements Serializable{
 
     @Id
-    private String id;
+    private  String id;
 
-    private int address;
-
+    private final Date createdAt;
     private String name;
+    private String lastName;
+    private String email;
+    @SuppressWarnings("unused")
+    private String passwordHash;
 
-    private String password;
-
-    public User() {
-    }
-
-    public User(String id, int address, String name, String password) {
+    public User(String id, String name, String lastName, String email, String password) {
         this.id = id;
-        this.address = address;
         this.name = name;
-        this.password = password;
+        this.lastName = lastName;
+        this.email = email;
+        this.passwordHash = new BCryptPasswordEncoder().encode(password);
+        this.createdAt = new Date();
     }
 
+    public User(UserDto userDto) {
+        this.id = UUID.randomUUID().toString();
+        this.name = userDto.getName();
+        this.lastName = userDto.getLastName();
+        this.email = userDto.getEmail();
+        this.passwordHash = new BCryptPasswordEncoder().encode(userDto.getPassword());
+        this.createdAt = new Date();
+    }
 
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public int getAddress() {
-        return address;
-    }
-
-    public void setAddress(int address) {
-        this.address = address;
     }
 
     public String getName() {
@@ -52,13 +51,37 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public void update(UserDto userDto) {
+        this.name = userDto.getName();
+        this.lastName = userDto.getLastName();
+        this.email = userDto.getEmail();
+        if (!userDto.getPassword().isEmpty()) {
+            this.passwordHash = new BCryptPasswordEncoder().encode(userDto.getPassword());
+        }
+    }
+
 }
