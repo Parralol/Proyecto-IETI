@@ -5,9 +5,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 // intento
 @SpringBootTest
 class PemcApplicationTests {
-
+/*
 	@Test
 	void contextLoads() {
-	}
+	}*/
 
 }

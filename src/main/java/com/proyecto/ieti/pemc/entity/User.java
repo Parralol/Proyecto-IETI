@@ -18,14 +18,15 @@ public class User implements Serializable{
     private String name;
     private String lastName;
     private String email;
-    @SuppressWarnings("unused")
     private String passwordHash;
+    private String companyId;
 
-    public User(String id, String name, String lastName, String email, String password) {
+    public User(String id, String name, String lastName, String email, String password, String companyId) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.email = email;
+        this.companyId = companyId;
         this.passwordHash = new BCryptPasswordEncoder().encode(password);
         this.createdAt = new Date();
     }
@@ -37,6 +38,7 @@ public class User implements Serializable{
         this.email = userDto.getEmail();
         this.passwordHash = new BCryptPasswordEncoder().encode(userDto.getPassword());
         this.createdAt = new Date();
+        this.companyId = userDto.getCompanyId();
     }
 
     public String getId() {
@@ -84,4 +86,7 @@ public class User implements Serializable{
         }
     }
 
+    public String getCompanyId() {
+        return companyId;
+    }
 }
