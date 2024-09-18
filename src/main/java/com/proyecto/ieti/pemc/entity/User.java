@@ -18,6 +18,7 @@ public class User implements Serializable{
     private String name;
     private String lastName;
     private String email;
+    @SuppressWarnings("unused")
     private String passwordHash;
     private String companyId;
 
