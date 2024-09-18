@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/v1/companies/")
 public class CompanyController {
