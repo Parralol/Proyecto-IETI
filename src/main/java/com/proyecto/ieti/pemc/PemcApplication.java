@@ -10,6 +10,9 @@ public class PemcApplication {
 		SpringApplication.run(PemcApplication.class, args);
 	}
 
+<<<<<<< HEAD
 	
 
+=======
+>>>>>>> main
 }
