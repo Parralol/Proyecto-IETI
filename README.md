@@ -33,23 +33,60 @@ Las organizaciones, especialmente las pequeñas y medianas empresas, a menudo no
    - Herramientas de IA Generativa para el diseño de prototipos visuales.
    - Docker para la creación de contenedores y despliegue del proyecto.
 
+## Modelos de datos
+
+### Modelo de Base de Datos de Usuario
+
+La clase `User` representa una colección de usuarios almacenados en una base de datos MongoDB. Cada usuario tiene un ID, nombre, apellido, correo electrónico, contraseña (hash) y una asociación con una empresa. Además, cada usuario se marca con una fecha de creación (`createdAt`).
+
+#### Colección de MongoDB: `users`
+
+#### Campos:
+
+| Nombre del Campo | Tipo      | Descripción                                                                 |
+| ---------------- | --------- | --------------------------------------------------------------------------- |
+| `id`             | `String`  | El identificador único del usuario.                                          |
+| `createdAt`      | `Date`    | La fecha y hora en que se creó el usuario (se establece automáticamente).   |
+| `name`           | `String`  | El nombre del usuario.                                                      |
+| `lastName`       | `String`  | El apellido del usuario.                                                    |
+| `email`          | `String`  | El correo electrónico del usuario (utilizado para comunicación).            |
+| `passwordHash`   | `String`  | La contraseña del usuario, almacenada de forma segura como hash.            |
+| `companyId`      | `String`  | El identificador de la empresa a la que pertenece el usuario.               |
+
+### Modelo de Base de Datos de Empresa
+
+La clase `Company` representa una colección de empresas almacenadas en una base de datos MongoDB. Cada empresa tiene un ID, nombre, NIT (número de identificación tributaria), dirección, teléfono, correo electrónico, y detalles de contacto. Además, mantiene una lista de IDs de usuarios asociados a la empresa.
+
+#### Colección de MongoDB: `companies`
+
+#### Campos:
+
+| Nombre del Campo  | Tipo        | Descripción                                                                |
+| ----------------- | ----------- | -------------------------------------------------------------------------- |
+| `id`              | `String`    | El identificador único de la empresa.                                       |
+| `name`            | `String`    | El nombre de la empresa.                                                    |
+| `nit`             | `String`    | El NIT (número de identificación tributaria) de la empresa.                 |
+| `address`         | `String`    | La dirección de la empresa.                                                 |
+| `phone`           | `String`    | El número de teléfono de la empresa.                                        |
+| `email`           | `String`    | El correo electrónico de la empresa.                                        |
+| `contactName`     | `String`    | El nombre de la persona de contacto principal de la empresa.                |
+| `contactPhone`    | `String`    | El número de teléfono del contacto principal.                               |
+| `contactEmail`    | `String`    | El correo electrónico del contacto principal.                               |
+| `usuariosIds`     | `List<User>`| Lista de usuarios (IDs) asociados a la empresa.                             |
+
+
 ## Instalación y Configuración
 
-### 1. Clonar el Repositorio
-```bash
-
-```
-
-### 2. Configurar MongoDB Atlas
+### 1. Configurar MongoDB Atlas
 1. Crear un clúster en [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 2. Configurar las credenciales de conexión en el archivo `application.properties`.
 
-### 3. Construcción del Proyecto
+### 2. Construcción del Proyecto
 ```bash
 ./mvnw clean install
 ```
 
-### 4. Ejecutar la Aplicación
+### 3. Ejecutar la Aplicación
 ```bash
 ./mvnw spring-boot:run
 ```
