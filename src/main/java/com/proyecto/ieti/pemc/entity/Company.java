@@ -33,7 +33,10 @@ public class Company implements Serializable {
         this.contactEmail = contactEmail;
     }
 
+    public Company(){
 
+    }
+    
     public String getName() {
         return name;
     }
