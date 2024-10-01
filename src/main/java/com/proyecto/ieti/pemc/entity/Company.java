@@ -5,12 +5,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.UUID;
 
 
 @Document("companies")
 public class Company implements Serializable {
-    @Id
 
+    @Id
     private  String id;
     private String name;
     private String nit;
@@ -23,6 +24,7 @@ public class Company implements Serializable {
     private List<User> usuariosIds;
 
     public Company(String name, String nit, String address, String phone, String email, String contactName, String contactPhone, String contactEmail) {
+        this.id = UUID.randomUUID().toString();
         this.name = name;
         this.nit = nit;
         this.address = address;
