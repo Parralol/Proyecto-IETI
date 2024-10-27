@@ -14,7 +14,7 @@ public class User implements Serializable{
     @Id
     private  String id;
 
-    private final Date createdAt;
+    private Date createdAt;
     private String name;
     private String lastName;
     private String email;
@@ -43,9 +43,7 @@ public class User implements Serializable{
         this.passwordHash = new BCryptPasswordEncoder().encode(password);
         this.createdAt = new Date();
     }
-    public User withCreatedAt(Date createdAt) {
-        return new User(this.id, this.name, this.email, createdAt);
-    }
+
 
     public User(UserDto userDto) {
         this.id = UUID.randomUUID().toString();
@@ -57,13 +55,17 @@ public class User implements Serializable{
         this.companyId = userDto.getCompanyId();
     }
 
-    public User(String id2, String name2, String email2, Date createdAt2) {
-        this.id = id2;
-        this.name = name2;
-        this.email = email2;
-        this.createdAt = createdAt2;
-        
+    
+    public void setCreatedAt(Date createdAt) {
     }
+
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", createdAt=" + createdAt + ", name=" + name + ", lastName=" + lastName + ", email="
+                + email + ", companyId=" + companyId + "]";
+    }
+
+
     public String getId() {
         return id;
     }
@@ -116,4 +118,5 @@ public class User implements Serializable{
     public String getPasswordHash() {
         return passwordHash;
     }
+
 }
