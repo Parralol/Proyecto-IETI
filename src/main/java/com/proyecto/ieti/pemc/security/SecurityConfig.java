@@ -34,16 +34,19 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((requests) -> requests
-                                .requestMatchers(HttpMethod.POST, "/v1/users/", "/v1/authenticate/").permitAll()
-                                .anyRequest().authenticated()
+                        .requestMatchers(HttpMethod.POST, "/v1/users/", "/v1/authenticate/").permitAll() // Permitir el acceso sin autenticación
+                        .requestMatchers("/styles.css","/login.html", "/register.html", "/static/**").permitAll()
+                        .requestMatchers("/home.html").authenticated()
+                        .anyRequest().authenticated()
                 )
                 .sessionManagement((session) -> session
-                                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
