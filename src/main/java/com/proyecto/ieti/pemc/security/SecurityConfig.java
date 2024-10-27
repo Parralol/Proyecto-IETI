@@ -34,8 +34,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((requests) -> requests
-                                .requestMatchers(HttpMethod.POST, "/v1/authenticate/").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/v1/users/").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/v1/users/", "/v1/authenticate/").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement((session) -> session

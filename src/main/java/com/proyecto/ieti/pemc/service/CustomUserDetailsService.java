@@ -21,7 +21,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
 
-        return User.withUsername(user.getName())
+        return User.withUsername(user.getEmail())
                    .password(user.getPasswordHash()) // Ensure password is encrypted
                    .roles("USER") // Customize roles as needed
                    .build();

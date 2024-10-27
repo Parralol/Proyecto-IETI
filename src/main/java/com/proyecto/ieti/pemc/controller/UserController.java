@@ -29,7 +29,7 @@ public class UserController {
         User user = new User(dto);
 
         usersService.save(user);
-        return ResponseEntity.created(createdUserUri).body(null);
+        return ResponseEntity.created(createdUserUri).body(user);
     }
 
     @GetMapping

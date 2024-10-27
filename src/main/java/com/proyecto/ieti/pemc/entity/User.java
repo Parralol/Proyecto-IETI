@@ -14,7 +14,7 @@ public class User implements Serializable{
     @Id
     private  String id;
 
-    private final Date createdAt;
+    private Date createdAt;
     private String name;
     private String lastName;
     private String email;
@@ -40,6 +40,24 @@ public class User implements Serializable{
         this.passwordHash = new BCryptPasswordEncoder().encode(userDto.getPassword());
         this.createdAt = new Date();
         this.companyId = userDto.getCompanyId();
+    }
+
+    public User(){
+        this.createdAt = new Date();
+
+    }
+    
+    public void setCreatedAt(Date createdAt) {
+    }
+
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", createdAt=" + createdAt + ", name=" + name + ", lastName=" + lastName + ", email="
+                + email + ", companyId=" + companyId + "]";
+    }
+
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId;
     }
 
     public String getId() {
@@ -94,4 +112,5 @@ public class User implements Serializable{
     public String getPasswordHash() {
         return passwordHash;
     }
+
 }
