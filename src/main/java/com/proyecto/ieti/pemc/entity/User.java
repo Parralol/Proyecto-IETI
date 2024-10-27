@@ -90,4 +90,8 @@ public class User implements Serializable{
     public String getCompanyId() {
         return companyId;
     }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
 }

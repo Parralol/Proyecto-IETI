@@ -14,6 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.proyecto.ieti.pemc.service.CustomUserDetailsService;
+
 @SuppressWarnings("unused")
 @Configuration
 @EnableWebSecurity
@@ -24,7 +26,8 @@ public class SecurityConfig {
 
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private CustomUserDetailsService userDetailsService;
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
