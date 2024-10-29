@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:3000/login")
 @RequestMapping("/v1/authenticate/")
 public class AuthController {
 
@@ -27,6 +27,7 @@ public class AuthController {
     @Autowired
     private JwtUtil jwtUtil;
 
+    @CrossOrigin
     @PostMapping
     public ResponseEntity<Map<String, String>> login(@RequestBody AuthRequest loginDto) throws Exception {
         Optional<User> xf = Optional.ofNullable(userDetailsService.findByEmail(loginDto.getUsername()));
@@ -41,6 +42,7 @@ public class AuthController {
     }
 
 }
+
 
 // Clase para la solicitud de autenticación
 class AuthRequest {

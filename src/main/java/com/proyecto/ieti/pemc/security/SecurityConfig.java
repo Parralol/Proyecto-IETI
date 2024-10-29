@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.proyecto.ieti.pemc.config.CustomCorsConfiguration;
 import com.proyecto.ieti.pemc.service.CustomUserDetailsService;
 
 @SuppressWarnings("unused")
@@ -29,6 +30,8 @@ public class SecurityConfig {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
+    @Autowired
+    CustomCorsConfiguration customCorsConfiguration;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -38,10 +41,11 @@ public class SecurityConfig {
                         .requestMatchers("/styles.css","/login.html", "/register.html", "/static/**").permitAll()
                         .requestMatchers("/home.html").authenticated()
                         .anyRequest().authenticated()
+                        
                 )
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                );
+                ).cors(c -> c.configurationSource(customCorsConfiguration));
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
@@ -57,4 +61,6 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
+
+    
 }
