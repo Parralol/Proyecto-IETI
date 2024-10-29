@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.proyecto.ieti.pemc.config.CustomCorsConfiguration;
 import com.proyecto.ieti.pemc.service.CustomUserDetailsService;
 
 @SuppressWarnings("unused")
@@ -29,21 +30,27 @@ public class SecurityConfig {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
+    @Autowired
+    CustomCorsConfiguration customCorsConfiguration;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((requests) -> requests
-                                .requestMatchers(HttpMethod.POST, "/v1/users/", "/v1/authenticate/").permitAll()
-                                .anyRequest().authenticated()
+                        .requestMatchers(HttpMethod.POST, "/v1/users/", "/v1/authenticate/").permitAll() // Permitir el acceso sin autenticación
+                        .requestMatchers("/styles.css","/login.html", "/register.html", "/static/**").permitAll()
+                        .requestMatchers("/home.html").authenticated()
+                        .anyRequest().authenticated()
+                        
                 )
                 .sessionManagement((session) -> session
-                                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                );
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                ).cors(c -> c.configurationSource(customCorsConfiguration));
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -54,4 +61,6 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
+
+    
 }

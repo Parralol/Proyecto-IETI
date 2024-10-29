@@ -13,6 +13,7 @@ import com.proyecto.ieti.pemc.entity.UserDto;
 import com.proyecto.ieti.pemc.service.UserService;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/v1/users/")
 public class UserController {
 
