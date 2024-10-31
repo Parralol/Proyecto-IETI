@@ -94,6 +94,7 @@ La clase `Company` representa una colección de empresas almacenadas en una base
 ### 4. Front de la Aplicación 
 
 https://github.com/Parralol/Front-IETI.git
+https://simplecurity.up.railway.app/login
 
 ## Uso
 
