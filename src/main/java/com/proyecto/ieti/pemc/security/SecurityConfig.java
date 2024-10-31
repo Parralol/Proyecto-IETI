@@ -38,14 +38,12 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(HttpMethod.POST, "/v1/authenticate/").permitAll() // Permitir el acceso sin autenticación
-                        .requestMatchers("/login").permitAll()                
-                        .requestMatchers(HttpMethod.POST,"/v1/users/").authenticated()
+                        .requestMatchers( "/login","/login.html", "/static/**").permitAll()               
+                        .requestMatchers(HttpMethod.POST,"/v1/users/", "/login").authenticated()
                         .requestMatchers(HttpMethod.GET, "/v1/users/").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/v1/users/{id}").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/v1/users/{id}").authenticated()
-                        .requestMatchers("/home").authenticated()
                         .anyRequest().authenticated()
-                        
                 )
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
