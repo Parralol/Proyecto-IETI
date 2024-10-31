@@ -37,9 +37,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers(HttpMethod.POST, "/v1/users/", "/v1/authenticate/").permitAll() // Permitir el acceso sin autenticación
-                        .requestMatchers("/styles.css","/login.html", "/register.html", "/static/**").permitAll()
-                        .requestMatchers("/home.html").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/v1/authenticate/").permitAll() // Permitir el acceso sin autenticación
+                        .requestMatchers("/login").permitAll()                
+                        .requestMatchers(HttpMethod.POST,"/v1/users/").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/v1/users/").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/v1/users/{id}").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/v1/users/{id}").authenticated()
+                        .requestMatchers("/home").authenticated()
                         .anyRequest().authenticated()
                         
                 )
