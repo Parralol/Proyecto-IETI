@@ -6,7 +6,6 @@ import com.proyecto.ieti.pemc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +16,6 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080/login")
 @RequestMapping("/v1/authenticate/")
 public class AuthController {
 
@@ -27,7 +25,6 @@ public class AuthController {
     @Autowired
     private JwtUtil jwtUtil;
 
-    @CrossOrigin
     @PostMapping
     public ResponseEntity<Map<String, String>> login(@RequestBody AuthRequest loginDto) throws Exception {
         Optional<User> xf = Optional.ofNullable(userDetailsService.findByEmail(loginDto.getUsername()));
