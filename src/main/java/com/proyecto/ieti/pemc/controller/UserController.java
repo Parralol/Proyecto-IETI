@@ -13,6 +13,7 @@ import com.proyecto.ieti.pemc.entity.UserDto;
 import com.proyecto.ieti.pemc.service.UserService;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/v1/users/")
 public class UserController {
 
@@ -43,7 +44,7 @@ public class UserController {
         return ResponseEntity.ok(usersService.findById(id).get());
     }
 
-    @PutMapping
+    @PutMapping("{id}")
     public ResponseEntity<User> updateUser(@PathVariable("id") String id, @RequestBody UserDto dto) {
         User user = usersService.findById(id).get();
         user.setEmail(dto.getEmail());
@@ -53,7 +54,7 @@ public class UserController {
         return ResponseEntity.ok(null);
     }
 
-    @DeleteMapping
+    @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable("id") String id) {
         usersService.deleteById(id);
         return ResponseEntity.ok().build();

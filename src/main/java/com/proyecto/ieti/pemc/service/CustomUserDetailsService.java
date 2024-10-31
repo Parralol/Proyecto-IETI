@@ -1,5 +1,7 @@
 package com.proyecto.ieti.pemc.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,10 +18,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // Replace this with your own user lookup logic
-        com.proyecto.ieti.pemc.entity.User user = userService.findByName(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found with username: " + username);
-        }
+        Optional<com.proyecto.ieti.pemc.entity.User> userOpt = Optional.ofNullable(userService.findByEmail(username));
+        
+        // Handle user not found
+        com.proyecto.ieti.pemc.entity.User user = userOpt.orElseThrow(() ->
+            new UsernameNotFoundException("User not found with username: " + username));
 
         return User.withUsername(user.getEmail())
                    .password(user.getPasswordHash()) // Ensure password is encrypted
