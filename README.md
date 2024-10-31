@@ -95,6 +95,8 @@ La clase `Company` representa una colección de empresas almacenadas en una base
 
 https://github.com/Parralol/Front-IETI.git
 
+https://simplecurity.up.railway.app/login
+
 ## Uso
 
 - La plataforma presenta un formulario de evaluación de ciberseguridad que permite a las empresas determinar su nivel de madurez.
