@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,28 +27,37 @@ public class SecurityConfig {
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
-
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
     @Autowired
-    CustomCorsConfiguration customCorsConfiguration;
+    private CustomCorsConfiguration customCorsConfiguration;
+
+    @Bean
+    WebSecurityCustomizer configureWebSecurity() {
+        return (web) -> web.ignoring().requestMatchers("/resources/**", "/static/**", "/static/css/**", "/static/js/**");
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers(HttpMethod.POST, "/v1/authenticate/").permitAll() // Permitir el acceso sin autenticación
-                        .requestMatchers( "/login","/login.html", "/static/**").permitAll()               
-                        .requestMatchers(HttpMethod.POST,"/v1/users/", "/login").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/v1/authenticate/").permitAll()
+                        .requestMatchers("/", "/login", "/public/**", "/static/**", "/resources/**", "/static/**", "/static/css/**",
+                         "/static/js/**", "/index.html", "/manifest.json", "/logo192.png"
+                         , "/favicon.ico")
+                        .permitAll()
+                        .requestMatchers(HttpMethod.POST, "/v1/users/").authenticated()
                         .requestMatchers(HttpMethod.GET, "/v1/users/").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/v1/users/{id}").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/v1/users/{id}").authenticated()
-                        .anyRequest().authenticated()
+                        .anyRequest().authenticated())
+                .exceptionHandling(exceptions -> exceptions
+                        .accessDeniedPage("/login") // Redirect to login page on access denied
                 )
                 .sessionManagement((session) -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                ).cors(c -> c.configurationSource(customCorsConfiguration));
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .cors(c -> c.configurationSource(customCorsConfiguration));
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
@@ -59,9 +69,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+            throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-
-    
 }

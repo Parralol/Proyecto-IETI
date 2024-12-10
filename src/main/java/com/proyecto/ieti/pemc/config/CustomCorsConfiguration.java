@@ -15,7 +15,7 @@ public class CustomCorsConfiguration implements CorsConfigurationSource {
     public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
         CorsConfiguration config = new CorsConfiguration();
         try {
-            config.setAllowedOrigins(List.of("http://" +Runtime.getRuntime().exec("hostname")));
+            config.setAllowedOrigins(List.of("http://" +Runtime.getRuntime().exec("hostname"), "http://localhost:3000"));
         } catch (IOException e) {
             e.printStackTrace();
         }
