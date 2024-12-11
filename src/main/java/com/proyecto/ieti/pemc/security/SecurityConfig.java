@@ -53,7 +53,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/v1/users/{id}", "/api/chat").authenticated()
                         .anyRequest().authenticated())
                 .exceptionHandling(exceptions -> exceptions
-                        .accessDeniedPage("/login") // Redirect to login page on access denied
+                        .accessDeniedPage("/login") 
                 )
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))

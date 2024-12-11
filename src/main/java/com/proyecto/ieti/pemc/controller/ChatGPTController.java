@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import com.proyecto.ieti.pemc.service.ChatGPTService;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/chat")
 public class ChatGPTController {
 
