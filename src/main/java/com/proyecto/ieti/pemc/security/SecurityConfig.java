@@ -47,10 +47,10 @@ public class SecurityConfig {
                          "/static/js/**", "/index.html", "/manifest.json", "/logo192.png"
                          , "/favicon.ico")
                         .permitAll()
-                        .requestMatchers(HttpMethod.POST, "/v1/users/").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/v1/users/").authenticated()
-                        .requestMatchers(HttpMethod.PUT, "/v1/users/{id}").authenticated()
-                        .requestMatchers(HttpMethod.DELETE, "/v1/users/{id}").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/v1/users/", "/api/chat").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/v1/users/", "/api/chat").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/v1/users/{id}", "/api/chat").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/v1/users/{id}", "/api/chat").authenticated()
                         .anyRequest().authenticated())
                 .exceptionHandling(exceptions -> exceptions
                         .accessDeniedPage("/login") // Redirect to login page on access denied
