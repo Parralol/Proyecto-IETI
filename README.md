@@ -103,6 +103,11 @@ https://simplecurity.up.railway.app/login
 - El motor de IA genera un conjunto de recomendaciones personalizadas basadas en los resultados del formulario.
 - El chatbot interactivo guía a los usuarios durante el proceso de implementación de mejoras.
 
+## Pruebaas unitarias pasando
+
+![image](https://github.com/user-attachments/assets/e7541a73-b9cc-4385-96b9-e2cc703290ea)
+
+
 ## Plan de Desarrollo
 
 1. **Fase 1**: Investigación y Diseño del motor de recomendaciones.
